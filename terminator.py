@@ -27,9 +27,7 @@ else:
         print("Idle CPU")
 
         response = client.stop_instances(
-            InstanceIds=[
-                'i-0781f9e781c15b0c4',
-            ],
+            InstanceIds=gimme_instence_id()
         )
 
 
