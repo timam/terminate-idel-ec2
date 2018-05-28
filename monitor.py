@@ -10,5 +10,5 @@ while True:
     with open("history.txt", "a") as file:
         file.write(percentage + "\n")
 
-    sleep(60)
+    sleep(1)
 
