@@ -7,8 +7,9 @@ while True:
     percentage = (top[0]).replace("\n", "")
 
     # Write percentage in a history file
-    with open("history.txt", "a") as file:
+    with open("usage.txt", "a") as file:
         file.write(percentage + "\n")
 
-    sleep(1)
+    sleep(60)
+
 
