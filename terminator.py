@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import os
+import signal
 import boto3
 from secrets import *
 
@@ -10,7 +12,7 @@ client = boto3.client(
     aws_secret_access_key= gimme_aws_secret_access_key()
 )
 # Reading contents of history
-file_handle = open('/var/opt/usage.txt', "r")
+file_handle = open('/var/opt/usage.log', "r")
 raw_list = file_handle.readlines()
 file_handle.close()
 
@@ -24,10 +26,18 @@ if len(cpu_usage_list) < 15:
 
 else:
     if all(i < 20.0 for i in cpu_usage_list[-15:]):
-        print("Idle CPU")
+
+        with open("/var/opt/usage.log", "a") as file:
+            file.write("CPU IDLE for last 15 mins, Terminating.....")
+
+        # Killing monitor.py
+        monitor_pid = list(os.popen(''' ps -aux | grep -v grep | grep monitor.py | awk '{ print $2 }' '''))
+        pid = (monitor_pid[0]).replace("\n", "")
+        os.kill(int(pid), signal.SIGTERM)
+        print("Killing pid" + pid)
 
         response = client.terminate_instances(
-        InstanceIds = gimme_instence_id()
+            InstanceIds =  gimme_instence_id()
         )
 
     else:
