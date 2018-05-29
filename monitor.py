@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import os
 from time import sleep
 
@@ -7,9 +9,7 @@ while True:
     percentage = (top[0]).replace("\n", "")
 
     # Write percentage in a history file
-    with open("usage.txt", "a") as file:
+    with open("/var/opt/usage.txt", "a") as file:
         file.write(percentage + "\n")
 
     sleep(60)
-
-
