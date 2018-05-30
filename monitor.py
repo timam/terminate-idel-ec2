@@ -9,7 +9,7 @@ while True:
     percentage = (top[0]).replace("\n", "")
 
     # Write percentage in a history file
-    with open("/var/opt/usage.txt", "a") as file:
+    with open("/var/opt/usage.log", "a") as file:
         file.write(percentage + "\n")
 
     sleep(60)
