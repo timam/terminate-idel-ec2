@@ -1,4 +1,5 @@
-#Terminate Idle Ec2
+# Terminate Idle Ec2
+
 
 
 Add the following line in /etc/rc.local.
